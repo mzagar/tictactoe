@@ -22,6 +22,10 @@ class Game {
         init(board);
     }
 
+    void setBoard(Player[][] board) {
+        this.board = board;
+    }
+
     boolean over() {
         for (int row = 0; row < ROWS; row++) {
             if (sameOnRow(row)) {
