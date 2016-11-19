@@ -8,9 +8,9 @@ package ticktacktoe;
 import ticktacktoe.Game.Player;
 
 /**
- * To run server: java -jar ticktacktoe.jar 
- * To run client: java -DisClient ticktacktoe.jar
- * Client connects to server running on localhost port 12345 (hardcoded).
+ * To run server: java -jar dist/ticktacktoe.jar 
+ * To run client: java -DisClient -jar dist/ticktacktoe.jar
+ * Client connects to server running on localhost port 12345.
  * 
  * @author mzagar
  */
