@@ -36,12 +36,7 @@ public class Main {
             currentPlayer = playerController.next();
 
             if (isLocalPlayer(client, currentPlayer)) {
-                Move move;
-                while(true) {
-                    move = ui.getMove(currentPlayer);
-                    if (game.isValidMode(move)) break;
-                    ui.illegalMove(move);
-                }
+                Move move = getValidMove(ui, game, currentPlayer);
 
                 game.move(move, currentPlayer);
                 
@@ -74,6 +69,13 @@ public class Main {
         }
     }
 
+    private static Move getValidMove(UI ui, Game game, Player currentPlayer) {
+        while(true) {
+            Move move = ui.getMove(currentPlayer);
+            if (game.isValidMode(move)) return move;
+            ui.illegalMove(move);
+        }
+    }
 }
 
 

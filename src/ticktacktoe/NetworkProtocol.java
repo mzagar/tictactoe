@@ -20,11 +20,11 @@ class NetworkProtocol {
 
     NetworkProtocol(boolean client) throws IOException {
         if (!client) {
-            System.out.println("Waiting for client connection on port 12345...");
+            System.out.println("Server started, waiting for client connection on port 12345...");
             socket = new ServerSocket(12345).accept();
             System.out.println("New client connected: " + socket);
         } else {
-            System.out.println("Connecting to server on localhost port 12345...");
+            System.out.println("Client started, connecting to server on localhost port 12345...");
             socket = new Socket("localhost", 12345);
             System.out.println("Conected to server: " + socket);
         }
