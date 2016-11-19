@@ -5,34 +5,28 @@
  */
 package ticktacktoe;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Scanner;
 import ticktacktoe.Game.Player;
 
 /**
- *
+ * To run server: java -jar ticktacktoe.jar 
+ * To run client: java -DisClient ticktacktoe.jar
+ * Client connects to server running on localhost port 12345 (hardcoded).
+ * 
  * @author mzagar
  */
 public class Main {
 
-    private static boolean client;
+    private static final boolean client = System.getProperty("isClient") != null;
+    private static final boolean consoleUI = System.getProperty("consoleUI") != null;
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        
-        client = System.getProperty("isClient") != null;
-        
         Game game = new Game();
-        UI ui = createUI(client, game);
-        NetworkProtocol networkProtocol = new NetworkProtocol(client);
+        UI ui = createUI();
         PlayerController playerController = new PlayerController(Player.X);
+        NetworkProtocol networkProtocol = new NetworkProtocol(client);
 
         ui.render(game);
         
@@ -42,9 +36,7 @@ public class Main {
             currentPlayer = playerController.next();
 
             if (isLocalPlayer(client, currentPlayer)) {
-                
                 Move move;
-                
                 while(true) {
                     move = ui.getMove(currentPlayer);
                     if (game.isValidMode(move)) break;
@@ -56,7 +48,7 @@ public class Main {
                 System.out.println("Sending local game state to remote...");
                 networkProtocol.sendLocalState(new GameState(game.getBoardSnapshot(), currentPlayer));
             } else {
-                System.out.println("Waiting for remote move from player: " + currentPlayer);
+                System.out.println("Waiting for remote state from player: " + currentPlayer);
                 GameState remoteState = networkProtocol.waitForRemoteState();
                 game.setBoard(remoteState.getBoard());
             }
@@ -71,12 +63,15 @@ public class Main {
         return client && Player.X == currentPlayer || !client && Player.O == currentPlayer;
     }
 
-    private static UI createUI(boolean client, Game game) {
-        return new ConsoleUI();
-//        GameForm form = new GameForm(game);
-//        form.setVisible(true);
-//        form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
-//        return form;
+    private static UI createUI() {
+        if (consoleUI) {
+            return new ConsoleUI();
+        } else {
+            SwingUI form = new SwingUI();
+            form.setVisible(true);
+            form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
+            return form;
+        }
     }
 
 }
