@@ -5,14 +5,19 @@
  */
 package ticktacktoe;
 
+import java.util.Scanner;
+
 /**
  *
  * @author mzagar
  */
-public class Screen {
+public class ConsoleUI implements UI {
     private static final String PLAYER_X = "X";
     private static final String PLAYER_O = "O";
 
+    public ConsoleUI() {
+    }
+    
     public void render(Game game) {
         System.out.println("\n--------------------------");
         Game.Player[][] boardSnapshot = game.getBoardSnapshot();
@@ -28,8 +33,21 @@ public class Screen {
         System.out.println("--------------------------\n");
     }
 
-    void illegalMove(Move move) {
+    public void illegalMove(Move move) {
         System.out.println("Move " + move + " is illegal" + ", allowed values 0..2 for x,y and position must not be already occupied. Try again");
     }
 
+    @Override
+    public Move getMove(Game.Player currentPlayer) {
+        System.out.print("Player " + currentPlayer + ", enter coordinates: x,y --> ");
+        String[] input = new Scanner(System.in).next().split(",");
+        int x = Integer.valueOf(input[0]);
+        int y = Integer.valueOf(input[1]);
+        return new Move(x, y);
+    }
+
+    @Override
+    public void gameOver(String message) {
+        System.out.println(message);
+    }
 }
