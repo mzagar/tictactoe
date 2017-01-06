@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author mzagar
  */
-class GameState implements Serializable {
+public class GameState implements Serializable {
     private static final int serialVersionUID = 1;
     private final Game.Player[][] board;
     private final Game.Player currentPlayer;

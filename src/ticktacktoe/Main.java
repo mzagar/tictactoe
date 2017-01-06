@@ -5,6 +5,9 @@
  */
 package ticktacktoe;
 
+import fx.NewFXMain;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ticktacktoe.Game.Player;
 
 /**
@@ -62,10 +65,11 @@ public class Main {
         if (consoleUI) {
             return new ConsoleUI();
         } else {
-            SwingUI form = new SwingUI();
-            form.setVisible(true);
-            form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
-            return form;
+            return NewFXMain.start();
+//            SwingUI form = new SwingUI();
+//            form.setVisible(true);
+//            form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
+//            return form;
         }
     }
 

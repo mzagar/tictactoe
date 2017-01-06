@@ -9,7 +9,7 @@ package ticktacktoe;
  *
  * @author mzagar
  */
-class Move {
+public class Move {
     private final int x;
     private final int y;
 

@@ -9,7 +9,7 @@ package ticktacktoe;
  *
  * @author mzagar
  */
-class Game {
+public class Game {
 
     public enum Player {
         X, O
