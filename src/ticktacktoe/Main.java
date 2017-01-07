@@ -21,6 +21,7 @@ public class Main {
 
     private static final boolean client = System.getProperty("isClient") != null;
     private static final boolean consoleUI = System.getProperty("consoleUI") != null;
+    private static final boolean swingUI = System.getProperty("swingUI") != null;
     
     /**
      * @param args the command line arguments
@@ -64,13 +65,16 @@ public class Main {
     private static UI createUI() {
         if (consoleUI) {
             return new ConsoleUI();
-        } else {
-            return NewFXMain.start();
-//            SwingUI form = new SwingUI();
-//            form.setVisible(true);
-//            form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
-//            return form;
         }
+        
+        if (swingUI) {
+            SwingUI form = new SwingUI();
+            form.setVisible(true);
+            form.setTitle("Player: " + (client ? Player.X.name() : Player.O.name()));
+            return form;
+        }
+
+        return NewFXMain.start("Player: " + (client ? Player.X.name() : Player.O.name()));
     }
 
     private static Move getValidMove(UI ui, Game game, Player currentPlayer) {

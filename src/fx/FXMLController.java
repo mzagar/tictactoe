@@ -102,13 +102,11 @@ public class FXMLController implements UI, Initializable {
     
     @Override
     public Move getMove(Game.Player currentPlayer) {
-        
-        Stage stage = (Stage) button00.getScene().getWindow();
-        Platform.runLater(() -> stage.setTitle("Your move!"));
+        setTitle("Your move");
         synchronized(moveSynchronizer) {
             try {
                 moveSynchronizer.wait();
-                Platform.runLater(() -> stage.setTitle("Wait your turn..."));
+                setTitle("Wait your turn...");
                 return latestMove;
             } catch (InterruptedException ex) {
                 Logger.getLogger(SwingUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,5 +120,10 @@ public class FXMLController implements UI, Initializable {
             latestMove = move;
             moveSynchronizer.notifyAll();
         }
+    }
+
+    private void setTitle(String message) {
+        Stage stage = (Stage) button00.getScene().getWindow();
+        Platform.runLater(() -> stage.setTitle(message));
     }
 }

@@ -11,14 +11,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ticktacktoe.UI;
 
@@ -28,15 +23,10 @@ import ticktacktoe.UI;
  */
 public class NewFXMain extends Application  {
     private FXMLController controller;
-    private final String title;
+    private static String title = "unknown";
 
     public NewFXMain(){
         app = this;
-        title = "unknown";
-    }
-    
-    public NewFXMain(String title) {
-        this.title = title;
     }
     
     @Override
@@ -76,7 +66,8 @@ public class NewFXMain extends Application  {
         }
         return app;
     }
-    public static UI start() {
+    public static UI start(String title) {
+        NewFXMain.title = title;
         new Thread(() -> launch()).start();
         NewFXMain app = waitForStart();
         return app.controller;

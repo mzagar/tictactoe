@@ -45,6 +45,8 @@ public class SwingUI extends javax.swing.JFrame implements UI {
         jButton22 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(100, 100, 800, 800));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.GridLayout(3, 3));
 
         jButton00.addActionListener(new java.awt.event.ActionListener() {
