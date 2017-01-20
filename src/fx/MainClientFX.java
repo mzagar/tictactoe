@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ticktacktoe;
+package fx;
 
 import fx.FXMLController;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ticktacktoe.GameLogic;
 import ticktacktoe.GameLogic;
 import ticktacktoe.UI;
 
