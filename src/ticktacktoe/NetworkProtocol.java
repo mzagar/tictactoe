@@ -15,10 +15,10 @@ import java.net.Socket;
  *
  * @author mzagar
  */
-class NetworkProtocol {
+public class NetworkProtocol {
     final Socket socket;
 
-    NetworkProtocol(boolean client) throws IOException {
+    public NetworkProtocol(boolean client) throws IOException {
         if (!client) {
             System.out.println("Server started, waiting for client connection on port 12345...");
             socket = new ServerSocket(12345).accept();
@@ -30,11 +30,11 @@ class NetworkProtocol {
         }
     }
 
-    GameState waitForRemoteState() throws IOException, ClassNotFoundException {
+    public GameState waitForRemoteState() throws IOException, ClassNotFoundException {
         return (GameState) new ObjectInputStream(socket.getInputStream()).readObject();
     }
 
-    void sendLocalState(GameState gameState) throws IOException {
+    public void sendLocalState(GameState gameState) throws IOException {
         new ObjectOutputStream(socket.getOutputStream()).writeObject(gameState);
     }
     

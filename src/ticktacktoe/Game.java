@@ -22,11 +22,11 @@ public class Game {
         init(board);
     }
 
-    void setBoard(Player[][] board) {
+    public void setBoard(Player[][] board) {
         this.board = board;
     }
 
-    boolean over() {
+    public boolean over() {
         for (int row = 0; row < ROWS; row++) {
             if (sameOnRow(row)) {
                 return true;
@@ -109,7 +109,7 @@ public class Game {
         return false;
     }
 
-    boolean isValidMode(Move move) {
+    public boolean isValidMode(Move move) {
         if (move.getX() < 0 || move.getX() >= ROWS) {
             return false;
         }

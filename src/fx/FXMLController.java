@@ -16,8 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ticktacktoe.Game;
+import ticktacktoe.GameLogic;
 import ticktacktoe.Move;
 import ticktacktoe.SwingUI;
 import ticktacktoe.UI;
@@ -39,12 +42,14 @@ public class FXMLController implements UI, Initializable {
     @FXML Button button21;
     @FXML Button button22;
     
+    @FXML MenuItem close;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        button00.getStyleClass().add("toggle-button");
     }    
     
     @Override
@@ -80,6 +85,15 @@ public class FXMLController implements UI, Initializable {
         Platform.runLater(() -> new Alert(AlertType.INFORMATION, message).showAndWait());
     }
     
+    @FXML 
+    public void closeClicked(ActionEvent event) {
+        Alert a = new Alert(AlertType.CONFIRMATION, "Are you sure you want to close?", ButtonType.CANCEL, ButtonType.YES);
+        if (a.showAndWait().get().equals(ButtonType.YES)) {
+            Stage window = (Stage) button00.getScene().getWindow();
+            window.close();
+        }
+    }
+    
     @FXML
     public void buttonClick(ActionEvent event) {
         Object source = event.getSource();
@@ -94,6 +108,8 @@ public class FXMLController implements UI, Initializable {
         int y = coordinates.getBytes()[1] - 0x30;
         
         signalMove(new Move(x, y));
+        
+        button.setStyle("toggle-button");
         
     }
     

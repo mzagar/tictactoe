@@ -5,3 +5,16 @@
 .mainFxmlClass {
 
 }
+
+.toggle-button {
+//  -fx-background-image: url('https://s-media-cache-ak0.pinimg.com/originals/8a/0d/e9/8a0de928d2a69db20c5484631b5bfb4b.gif');
+  -fx-background-size: 60px;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: 30%;
+}
+
+.toggle-button:selected {
+//  -fx-graphic: url('http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Piece-of-cake-icon.png');
+}
+
+
